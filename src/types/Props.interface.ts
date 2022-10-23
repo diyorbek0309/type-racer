@@ -3,7 +3,8 @@ import { NativeSyntheticEvent, TextInputChangeEventData } from 'react-native';
 export interface MainProps {
   correctText: string;
   inputText: string;
-  setText: (newText: string) => void;
+  setEnteredText: (newText: string) => void;
+  enteredText: string;
 }
 
 export interface TimerProps {

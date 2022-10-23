@@ -1,17 +1,22 @@
 import { StyleSheet, Text, View, TextInput } from 'react-native';
-// import styles from './Home.module.css';
 import { MainProps } from '../types/Props.interface';
 
-const HMain = ({ correctText, inputText, setText }: MainProps) => {
+const HMain = ({
+  correctText,
+  inputText,
+  setEnteredText,
+  enteredText,
+}: MainProps) => {
   return (
     <View style={styles.HMain}>
       <TextInput
         style={styles.Main_input}
-        onChangeText={(newText) => setText(newText)}
+        onChangeText={setEnteredText}
+        value={enteredText}
       />
       <View>
         <Text style={styles.correctText}>{correctText}</Text>
-        <Text>{inputText}</Text>
+        <Text style={styles.inputText}>{inputText}</Text>
       </View>
     </View>
   );
@@ -29,8 +34,12 @@ const styles = StyleSheet.create({
   },
   correctText: {
     color: '#00ff00',
-    fontSize: 32,
-    lineHeight: 48,
+    fontSize: 20,
+    lineHeight: 24,
+  },
+  inputText: {
+    fontSize: 20,
+    lineHeight: 24,
   },
 });
 

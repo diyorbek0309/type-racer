@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { StyleSheet, Button, View } from 'react-native';
 import Main from '../components/Main';
 import Timer from '../components/Timer';
@@ -24,14 +24,16 @@ const Home = () => {
   );
   let [correctText, setCorrectText] = useState('');
   let [splittedText, setSplittedText] = useState(text);
+  let [enteredText, setEnteredText] = useState('');
   let [bool, setBool] = useState(true);
-  let [bool1, setBool1] = useState(true);
+  // let [bool1, setBool1] = useState(true);
   let [count, setCount] = useState(60);
   let [working, setWorking] = useState(true);
+  const funRef = useRef<null | NodeJS.Timeout>(null);
   // let [isLight, setIsLight] = useState(true);
   // let [isArial, setIsArial] = useState(true);
-  const [modalIsOpen, setIsOpen] = useState(false);
-  let [fullName, setFullName] = useState({ firstName: '', lastName: '' });
+  // const [modalIsOpen, setIsOpen] = useState(false);
+  // let [fullName, setFullName] = useState({ firstName: '', lastName: '' });
 
   // let firstNameInputRef = useRef(null);
   // let lastNameInputRef = useRef(null);
@@ -51,25 +53,25 @@ const Home = () => {
   //   subtitle.style.color = '#f00';
   // }
 
-  const handleChange = (inputText: string) => {
+  const handleChange = (newWord: string) => {
+    setEnteredText(newWord);
     // setBool(true);
+    console.log(newWord, text[0]);
 
-    if (inputText === text[0] + ' ') {
-      inputText = '';
+    if (newWord === text[0] + ' ') {
+      setEnteredText('');
       correctText += text[0] + ' ';
       setCorrectText(correctText);
-      setSplittedText(text.slice(1, text.length));
+      setText(text.slice(1, text.length));
     }
-    console.log(bool);
 
     if (bool) {
-      const timer = setInterval(() => {
+      funRef.current = setInterval(() => {
         if (count === 0) {
-          clearInterval(timer);
+          clearInterval(funRef.current as NodeJS.Timeout);
           setWorking(false);
         } else {
           setCount(--count);
-          console.log(count);
         }
       }, 1000);
       setBool(false);
@@ -93,8 +95,11 @@ const Home = () => {
   // };
 
   const resetAll = () => {
-    const highestTimeoutId = setTimeout(';');
+    // const highestIntervalId = setInterval(() => {
+    //   console.log('123');
+    // });
     let randomNumber = Math.round(Math.random() * 700);
+    clearInterval(funRef.current as NodeJS.Timeout);
 
     // correctText
     //   .split(' ')
@@ -103,9 +108,9 @@ const Home = () => {
     //     if (word.trim() !== '') splittedText.unshift(word);
     //   });
     // setCorrectText('');
-    for (let i = 0; i < highestTimeoutId; i++) {
-      clearTimeout(i);
-    }
+    // for (let i = 0; i < highestIntervalId; i++) {
+    //   clearInterval(i);
+    // }
     setCount(60);
     setBool(true);
     setText(dummyText.split(' ').slice(randomNumber, randomNumber + 160));
@@ -114,9 +119,10 @@ const Home = () => {
   return (
     <View style={styles.Home}>
       <Main
-        inputText={splittedText.join(' ')}
+        inputText={text.join(' ')}
         correctText={correctText}
-        setText={handleChange}
+        setEnteredText={handleChange}
+        enteredText={enteredText}
       />
       <Timer count={count} />
       <Button title="REFRESH" onPress={resetAll} />
