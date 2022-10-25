@@ -95,22 +95,16 @@ const Home = () => {
   // };
 
   const resetAll = () => {
-    // const highestIntervalId = setInterval(() => {
-    //   console.log('123');
-    // });
     let randomNumber = Math.round(Math.random() * 700);
     clearInterval(funRef.current as NodeJS.Timeout);
 
-    // correctText
-    //   .split(' ')
-    //   .reverse()
-    //   .forEach((word) => {
-    //     if (word.trim() !== '') splittedText.unshift(word);
-    //   });
-    // setCorrectText('');
-    // for (let i = 0; i < highestIntervalId; i++) {
-    //   clearInterval(i);
-    // }
+    correctText
+      .split(' ')
+      .reverse()
+      .forEach((word) => {
+        if (word.trim() !== '') splittedText.unshift(word);
+      });
+    setCorrectText('');
     setCount(60);
     setBool(true);
     setText(dummyText.split(' ').slice(randomNumber, randomNumber + 160));
@@ -132,10 +126,11 @@ const Home = () => {
 
 const styles = StyleSheet.create({
   Home: {
-    height: 90,
+    height: "80%",
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
+    alignItems: "flex-start",
     padding: 20,
   },
 });
