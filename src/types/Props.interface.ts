@@ -8,3 +8,8 @@ export interface ResultProps {
   percent: number;
   isLight: boolean;
 }
+
+export interface CustomBtnProps {
+  pressHandler: () => void;
+  image: any;
+}
