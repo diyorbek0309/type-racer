@@ -4,7 +4,7 @@ import { TimerProps } from '../types/Props.interface';
 const Timer = ({ count }: TimerProps) => {
   return (
     <View>
-      <Text>{count}</Text>
+      <Text style={{ fontSize: 24 }}>{count}</Text>
     </View>
   );
 };
