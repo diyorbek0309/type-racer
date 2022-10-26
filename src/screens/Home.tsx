@@ -27,22 +27,28 @@ const Home = ({ navigation }: any) => {
 
   useEffect(() => {
     navigation.setOptions({
+      headerStyle: {
+        backgroundColor: isLight ? '#fff' : '#000',
+      },
+      headerTitleStyle: {
+        color: isLight ? '#000' : '#fff',
+      },
       headerRight: () => (
         <View style={styles.Header}>
-          <TouchableOpacity onPress={() => setIsLight(true)}>
+          <TouchableOpacity onPress={() => setIsLight(true)} style={styles.Button}>
             <Image source={require('../../assets/sun_icon.png')} />
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => setIsLight(false)}>
+          <TouchableOpacity onPress={() => setIsLight(false)} style={styles.Button}>
             <Image source={require('../../assets/moon_icon.png')} />
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => resetAll()}>
+          <TouchableOpacity onPress={() => resetAll()} style={styles.Button}>
             <Image source={require('../../assets/refresh_icon.png')} />
           </TouchableOpacity>
-          <Timer count={count} />
+          <Timer count={count} isLight={isLight}/>
         </View>
       ),
     });
-  }, [navigation, count]);
+  }, [navigation, count, isLight]);
 
   const handleChange = (newWord: string) => {
     setEnteredText(newWord);
@@ -76,6 +82,7 @@ const Home = ({ navigation }: any) => {
         if (word.trim() !== '') text.unshift(word);
       });
     setCorrectText('');
+    setEnteredText('');
     setCount(6);
     setBool(true);
     setWorking(true);
@@ -83,7 +90,7 @@ const Home = ({ navigation }: any) => {
   };
 
   return (
-    <ScrollView style={styles.Home}>
+    <ScrollView style={isLight ? styles.HomeLight : styles.HomeDark}>
       {working ? (
         <View>
           <TextInput
@@ -95,7 +102,11 @@ const Home = ({ navigation }: any) => {
           />
           <View>
             <Text style={styles.correctText}>{correctText}</Text>
-            <Text style={styles.inputText}>{text.join(' ')}</Text>
+            <Text
+              style={isLight ? styles.inputTextLight : styles.inputTextDark}
+            >
+              {text.join(' ')}
+            </Text>
           </View>
         </View>
       ) : (
@@ -104,6 +115,7 @@ const Home = ({ navigation }: any) => {
           percent={Math.round(
             ((correctText.split(' ').length - 1) / text.length) * 100,
           )}
+          isLight={isLight}
         />
       )}
     </ScrollView>

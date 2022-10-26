@@ -1,11 +1,18 @@
 import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
-  Home: {
+  HomeLight: {
     height: '80%',
     width: '100%',
     display: 'flex',
     padding: 20,
+  },
+  HomeDark: {
+    height: '80%',
+    width: '100%',
+    display: 'flex',
+    padding: 20,
+    backgroundColor: '#000',
   },
   Header: {
     width: '70%',
@@ -14,7 +21,7 @@ export const styles = StyleSheet.create({
   },
   Main_input: {
     fontSize: 22,
-    border: "none",
+    border: 'none',
     borderBottomColor: 'black',
     borderBottomWidth: 2,
     backgroundColor: '#ddd',
@@ -27,9 +34,21 @@ export const styles = StyleSheet.create({
     fontSize: 20,
     lineHeight: 24,
   },
-  inputText: {
+  inputTextLight: {
     fontSize: 20,
     lineHeight: 24,
     textAlign: 'justify',
+    color: '#000',
+  },
+  inputTextDark: {
+    fontSize: 20,
+    lineHeight: 24,
+    textAlign: 'justify',
+    color: '#fff',
+  },
+  Button: {
+    backgroundColor: '#fff',
+    padding: 2,
+    borderRadius: 4,
   },
 });
