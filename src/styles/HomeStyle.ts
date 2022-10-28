@@ -29,6 +29,9 @@ export const styles = StyleSheet.create({
     padding: 2,
     marginBottom: 20,
   },
+  Main_input_red: {
+    color: '#f00',
+  },
   correctText: {
     color: '#00ff00',
     fontSize: 20,

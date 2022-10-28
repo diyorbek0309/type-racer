@@ -12,6 +12,7 @@ const Home = ({ navigation }: any) => {
   const [enteredText, setEnteredText] = useState('');
   const [working, setWorking] = useState(true);
   const [bool, setBool] = useState(true);
+  const [isCorrect, setIsCorrect] = useState(true);
   const [isLight, setIsLight] = useState(true);
   const funRef = useRef<null | NodeJS.Timeout>(null);
   const randomNumber = Math.round(Math.random() * 700);
@@ -51,8 +52,15 @@ const Home = ({ navigation }: any) => {
     setEnteredText(newWord);
     if (newWord === text[0] + ' ') {
       setEnteredText('');
+      setIsCorrect(true);
       setCorrectText(correctText + text[0] + ' ');
       setText(text.slice(1, text.length));
+    } else {
+      setIsCorrect(true);
+    }
+
+    if (newWord[newWord.length - 1] === ' ') {
+      setIsCorrect(false);
     }
 
     if (bool) {
@@ -91,7 +99,10 @@ const Home = ({ navigation }: any) => {
       {working ? (
         <View>
           <TextInput
-            style={styles.Main_input}
+            style={[
+              styles.Main_input,
+              isCorrect ? styles.Main_input : styles.Main_input_red,
+            ]}
             onChangeText={handleChange}
             value={enteredText}
             placeholder="Start typing..."
