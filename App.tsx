@@ -8,7 +8,7 @@ function App() {
   return (
     <NavigationContainer>
       <Navigator>
-        <Screen name="Home" component={HomeScreen} />
+        <Screen name="FW" component={HomeScreen} />
       </Navigator>
     </NavigationContainer>
   );
