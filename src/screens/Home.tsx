@@ -28,6 +28,12 @@ const Home = ({ navigation }: any) => {
       headerTitleStyle: {
         color: isLight ? '#000' : '#fff',
       },
+      headerLeft: () => (
+        <CustomBtn
+        pressHandler={navigation.toggleDrawer()}
+        image={require('../../assets/images/menu_icon_light.png')}
+        />
+      ),
       headerRight: () => (
         <View style={styles.Header}>
           <CustomBtn
