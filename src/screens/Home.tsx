@@ -28,15 +28,21 @@ const Home = ({ navigation }: any) => {
       headerTitleStyle: {
         color: isLight ? '#000' : '#fff',
       },
+      headerLeft: () => (
+        <CustomBtn
+          image={require('../../assets/menu_icon_light.png')}
+          pressHandler={() => navigation.toggleDrawer()}
+        />
+      ),
       headerRight: () => (
         <View style={styles.Header}>
           <CustomBtn
-            pressHandler={() => setIsLight(true)}
-            image={require('../../assets/sun_icon.png')}
-          />
-          <CustomBtn
-            pressHandler={() => setIsLight(false)}
-            image={require('../../assets/moon_icon.png')}
+            pressHandler={() => setIsLight(!isLight)}
+            image={
+              isLight
+                ? require('../../assets/moon_icon.png')
+                : require('../../assets/sun_icon.png')
+            }
           />
           <CustomBtn
             pressHandler={() => resetAll()}

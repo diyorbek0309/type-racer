@@ -15,9 +15,9 @@ export const styles = StyleSheet.create({
     backgroundColor: '#000',
   },
   Header: {
-    width: '70%',
+    width: '65%',
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'space-evenly',
   },
   Main_input: {
     fontSize: 22,
@@ -54,4 +54,8 @@ export const styles = StyleSheet.create({
     padding: 2,
     borderRadius: 4,
   },
+  BtnImage: {
+    width: 32,
+    height: 32,
+  }
 });

@@ -5,7 +5,7 @@ import { CustomBtnProps } from '../types/Props.interface';
 const CustomBtn = ({ pressHandler, image }: CustomBtnProps) => {
   return (
     <TouchableOpacity onPress={pressHandler} style={styles.Button}>
-      <Image source={image} />
+      <Image source={image} style={styles.BtnImage}/>
     </TouchableOpacity>
   );
 };
