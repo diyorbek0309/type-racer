@@ -3,9 +3,9 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import HomeScreen from './src/screens/Home';
 import History from './src/screens/History';
 
-const { Navigator, Screen } = createDrawerNavigator();
-
 function App() {
+  const { Navigator, Screen } = createDrawerNavigator();
+
   return (
     <NavigationContainer>
       <Navigator initialRouteName="Home">
