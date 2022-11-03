@@ -5,6 +5,7 @@ import Timer from '../components/Timer';
 import CustomBtn from '../components/CustomBtn';
 import { dummyText } from '../data';
 import { styles } from '../styles/HomeStyle';
+import { eColors, eImages } from '../types/enums';
 
 const Home = ({ navigation }: any) => {
   let [count, setCount] = useState(6);
@@ -23,14 +24,14 @@ const Home = ({ navigation }: any) => {
   useEffect(() => {
     navigation.setOptions({
       headerStyle: {
-        backgroundColor: isLight ? '#fff' : '#000',
+        backgroundColor: isLight ? eColors.WHITE : eColors.BLACK,
       },
       headerTitleStyle: {
-        color: isLight ? '#000' : '#fff',
+        color: isLight ? eColors.BLACK : eColors.WHITE,
       },
       headerLeft: () => (
         <CustomBtn
-          image={require('../../assets/menu_icon_light.png')}
+          image={eImages.MENU}
           pressHandler={() => navigation.toggleDrawer()}
         />
       ),
@@ -38,16 +39,9 @@ const Home = ({ navigation }: any) => {
         <View style={styles.Header}>
           <CustomBtn
             pressHandler={() => setIsLight(!isLight)}
-            image={
-              isLight
-                ? require('../../assets/moon_icon.png')
-                : require('../../assets/sun_icon.png')
-            }
+            image={isLight ? eImages.MOON : eImages.SUN}
           />
-          <CustomBtn
-            pressHandler={() => resetAll()}
-            image={require('../../assets/refresh_icon.png')}
-          />
+          <CustomBtn pressHandler={() => resetAll()} image={eImages.REFRESH} />
           <Timer count={count} isLight={isLight} />
         </View>
       ),

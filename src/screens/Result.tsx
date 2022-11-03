@@ -1,21 +1,21 @@
-import { Text, View } from 'react-native';
-import { ResultProps } from '../types/Props.interface';
-import { styles } from '../styles/ResultStyle';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useEffect } from 'react';
+import { Text, View } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { styles } from '../styles/ResultStyle';
+import { ResultProps, IResult } from '../types/Props.interface';
+import { eResults } from '../types/enums';
 
 const Result = ({ wpm, percent, isLight }: ResultProps) => {
-  let results: { wpm: number; percent: number; date: number }[] = [];
+  let results: IResult[] = [];
   useEffect(() => {
     getData();
   }, []);
 
   const getData = async () => {
     try {
-      await AsyncStorage.getItem('results').then((data) => {
+      await AsyncStorage.getItem(eResults.RESULTS).then((data) => {
         if (data) {
           results = JSON.parse(data);
-          console.log(results);
         }
       });
       results.push({ wpm, percent, date: Date.now() });
@@ -28,7 +28,7 @@ const Result = ({ wpm, percent, isLight }: ResultProps) => {
   const saveData = async () => {
     try {
       const jsonValue = JSON.stringify(results);
-      await AsyncStorage.setItem('results', jsonValue);
+      await AsyncStorage.setItem(eResults.RESULTS, jsonValue);
     } catch (error) {
       console.log(error);
     }

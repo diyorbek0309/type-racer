@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { View, Text, VirtualizedList } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { IResult } from '../types/Props.interface';
+import { eResults } from '../types/enums';
 
 const History = () => {
   const [results, setResults] = useState<IResult | []>([]);
@@ -11,7 +12,7 @@ const History = () => {
 
   const getResults = async () => {
     try {
-      const jsonValue = await AsyncStorage.getItem('results');
+      const jsonValue = await AsyncStorage.getItem(eResults.RESULTS);
       if (jsonValue) {
         setResults(JSON.parse(jsonValue));
       }
