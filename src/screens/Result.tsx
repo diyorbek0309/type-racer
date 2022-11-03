@@ -5,7 +5,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useEffect } from 'react';
 
 const Result = ({ wpm, percent, isLight }: ResultProps) => {
-  let results: { wpm: number; percent: number }[] = [];
+  let results: { wpm: number; percent: number; date: number }[] = [];
   useEffect(() => {
     getData();
   }, []);
@@ -17,9 +17,9 @@ const Result = ({ wpm, percent, isLight }: ResultProps) => {
           results = JSON.parse(data);
           console.log(results);
         }
-        saveData();
       });
-      results.push({ wpm, percent });
+      results.push({ wpm, percent, date: Date.now() });
+      saveData();
     } catch (error) {
       console.log(error);
     }
