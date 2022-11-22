@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
-import { View, Text, VirtualizedList } from 'react-native';
+import { View, Text, VirtualizedList, StyleSheet } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { IResult } from '../types/Props.interface';
 import { eResults } from '../types/enums';
 
 const History = () => {
-  const [results, setResults] = useState<IResult | []>([]);
+  const [results, setResults] = useState<IResult[] | []>([]);
   useEffect(() => {
     getResults();
   }, []);
@@ -21,30 +21,58 @@ const History = () => {
     }
   };
 
-  const getItemCount = () => 50;
-
-  const getItem = (data: any, index: any) => ({
+  const getItem = (data: any, index: number) => ({
     id: Math.random().toString(12).substring(0),
-    title: `Item ${index + 1}`,
+    ...data[0],
   });
+  const getItemCount = (data: any) => 1;
+
+  const Item = ({ date, wpm, percent }: IResult) => {
+    return (
+      <View style={styles.item}>
+        <Text style={styles.title}>WPM: {wpm}</Text>
+        <Text style={styles.title}>Percent: {percent}</Text>
+        <Text style={styles.title}>{`${new Date(date).getHours()}:${new Date(
+          date,
+        ).getMinutes()} ${new Date(date).getDay()}`}</Text>
+      </View>
+    );
+  };
 
   return (
     <View>
-      <Text>History</Text>
-      <VirtualizedList
-        data={results}
-        renderItem={({ item }: any) => (
-          <Text>
-            {item.wpm}
-            {item.percent}
-            {item.date}
-          </Text>
-        )}
-        getItemCount={getItemCount}
-        getItem={getItem}
-      />
+      {results && results.length > 0 ? (
+        <VirtualizedList
+          data={results}
+          initialNumToRender={1}
+          renderItem={({ item }) => {
+            console.log(item);
+            return (
+              <Item date={item.date} wpm={item.wpm} percent={item.percent} />
+            );
+          }}
+          getItemCount={getItemCount}
+          getItem={getItem}
+        />
+      ) : (
+        <Text>No results</Text>
+      )}
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  item: {
+    backgroundColor: '#f9c2ff',
+    height: 150,
+    justifyContent: 'center',
+    marginVertical: 8,
+    marginHorizontal: 16,
+    padding: 20,
+  },
+  title: {
+    fontSize: 32,
+  },
+});
 
 export default History;
