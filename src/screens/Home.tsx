@@ -8,7 +8,7 @@ import { styles } from '../styles/HomeStyle';
 import { eColors, eImages } from '../types/enums';
 
 const Home = ({ navigation }: any) => {
-  let [count, setCount] = useState(6);
+  let [count, setCount] = useState(60);
   const [correctText, setCorrectText] = useState('');
   const [enteredText, setEnteredText] = useState('');
   const [working, setWorking] = useState(true);
@@ -88,7 +88,7 @@ const Home = ({ navigation }: any) => {
       });
     setCorrectText('');
     setEnteredText('');
-    setCount(6);
+    setCount(60);
     setBool(true);
     setWorking(true);
     setText(dummyText.split(' ').slice(randomNumber, randomNumber + 160));

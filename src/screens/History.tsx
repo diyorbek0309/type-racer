@@ -46,7 +46,6 @@ const History = () => {
           data={results}
           initialNumToRender={1}
           renderItem={({ item }) => {
-            console.log(item);
             return (
               <Item date={item.date} wpm={item.wpm} percent={item.percent} />
             );
